@@ -1,4 +1,5 @@
 FROM ubuntu:18.04
+# Odoo v12
 
 ARG TERM=xterm
 ARG DEBIAN_FRONTEND=noninteractive
