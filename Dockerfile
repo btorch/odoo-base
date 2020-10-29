@@ -12,7 +12,8 @@ WORKDIR /opt/sources/
 # Installing some initial tools
 RUN apt-get update && \
   apt-get install -y locales \
-  apt-utils curl wget debconf
+  apt-utils curl wget debconf \
+  ca-certificates gnupg 
 
 
 # Setting up Locales
@@ -42,8 +43,10 @@ RUN echo 'deb http://apt.postgresql.org/pub/repos/apt/ bionic-pgdg main' > /etc/
 # Tools 
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
   apt-get install -y unzip chrony xsltproc \
-  git gcc build-essential postgresql-client-12 \
+  git gcc build-essential postgresql-client-12=12.4-1.pgdg18.04+2 \
+  libpq5=12.4-1.pgdg18.04+2 \
   software-properties-common nodejs gettext-base \
+  openssh-client \
   && rm -rf /var/lib/apt/lists/*
 
 
@@ -64,7 +67,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
   libtiff5-dev libjpeg8-dev libopenjp2-7-dev \
   zlib1g-dev libfreetype6-dev libssl-dev \
   liblcms2-dev libwebp-dev libharfbuzz-dev \
-  libfribidi-dev libxcb1-dev libpq-dev \
+  libfribidi-dev libxcb1-dev libpq-dev=12.4-1.pgdg18.04+2 \
   libzip-dev libxslt-dev libjpeg-dev \
   python3.6-dev libxmlsec1-dev libevent-dev \
   && rm -rf /var/lib/apt/lists/*
@@ -84,8 +87,9 @@ RUN  update-alternatives --install /usr/bin/python python /usr/bin/python3 1 && 
 ADD https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.5/wkhtmltox_0.12.5-1.bionic_amd64.deb /opt/sources/wkhtmltox.deb
 RUN apt-get update && \
   apt-get install -y fontconfig libx11-6 libxext6 \
-  libxrender1 xfonts-base xfonts-75dpi && \
-  dpkg -i /opt/sources/wkhtmltox.deb
+  libxrender1 xfonts-base xfonts-75dpi \
+  && dpkg -i /opt/sources/wkhtmltox.deb \
+  && rm -rf /var/lib/apt/lists/* 
 
 
 WORKDIR /opt/
