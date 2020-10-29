@@ -67,7 +67,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
   libtiff5-dev libjpeg8-dev libopenjp2-7-dev \
   zlib1g-dev libfreetype6-dev libssl-dev \
   liblcms2-dev libwebp-dev libharfbuzz-dev \
-  libfribidi-dev libxcb1-dev libpq-dev=12.4-1.pgdg18.04+2 \
+  libfribidi-dev libxcb1-dev libpq-dev \
   libzip-dev libxslt-dev libjpeg-dev \
   python3.6-dev libxmlsec1-dev libevent-dev \
   && rm -rf /var/lib/apt/lists/*
