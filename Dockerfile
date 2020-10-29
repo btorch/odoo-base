@@ -44,8 +44,7 @@ RUN echo 'deb http://apt.postgresql.org/pub/repos/apt/ bionic-pgdg main' > /etc/
 # Tools 
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
   apt-get install -y unzip chrony xsltproc \
-  git gcc build-essential postgresql-client-12=12.4-1.pgdg18.04+2 \
-  libpq5=12.4-1.pgdg18.04+2 \
+  git gcc build-essential postgresql-client-12 libpq5 \
   software-properties-common nodejs gettext-base \
   openssh-client \
   && rm -rf /var/lib/apt/lists/*
